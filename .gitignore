@@ -4,3 +4,4 @@
 output/*
 *.png
 chromedriver.exe
+pdf_files/*.pdf
