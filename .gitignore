@@ -1,0 +1,6 @@
+*.html
+*.xml
+*.log
+output/*
+*.png
+chromedriver.exe
