@@ -1,8 +1,8 @@
 tasks:
-  Run all tasks:
-    shell: python -m robot --report NONE --outputdir output --logtitle "Task log" tasks.robot
-  SeleniumOrderProcessing:
-    robotTaskName: Order robots from RobotSpareBin Industries Inc
+  Produce traffic data work items:
+    robotTaskName: Produce traffic data work items
+  Consume traffic data work items:
+    robotTaskName: Consume traffic data work items
     
 condaConfigFile: conda.yaml
 artifactsDir: output
@@ -10,7 +10,7 @@ PATH:
   - .
   
 PYTHONPATH:
-  - libs
+  - .
 
 ignoreFiles:
   - .gitignore
