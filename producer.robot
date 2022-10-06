@@ -6,6 +6,8 @@ Library             RPA.HTTP
 Library             RPA.JSON
 Library             RPA.Tables
 Library             Collections
+Library             RPA.Robocorp.WorkItems
+Resource            shared.robot
 
 
 *** Variables ***
@@ -26,9 +28,10 @@ Produce traffic data work items
     ${filtered_data}=    Filter and sort traffic data    ${traffic_data}
     Write table to CSV    ${filtered_data}    ${TRAFFIC_CSV_FILE}
     ${filtered_data}=    Get latest data by country    ${filtered_data}
-    Log    filtered_data ${filtered_data}
+    # Log    filtered_data ${filtered_data}
     ${payloads}=    Create work item payloads    ${filtered_data}
-    Log    payloads ${payloads}
+    # Log    payloads ${payloads}
+    Save work item payloads    ${payloads}
 
 
 *** Keywords ***
@@ -75,4 +78,13 @@ Create work item payloads
     END
     RETURN    ${payloads}
 
-https://robocorp.com/docs/courses/work-data-management/creating-output-work-items
+Save work item payloads
+    [Arguments]    ${payloads}
+    FOR    ${payload}    IN    @{payloads}
+        Save work item payload    ${payload}
+    END
+
+Save work item payload
+    [Arguments]    ${payload}
+    ${variables}=    Create Dictionary    ${WORK_ITEM_NAME}=${payload}
+    Create Output Work Item    variables=${variables}    save=True
